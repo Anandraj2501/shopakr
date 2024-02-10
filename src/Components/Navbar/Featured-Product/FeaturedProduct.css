@@ -1,0 +1,125 @@
+.product-container::-webkit-scrollbar{
+    display: none;
+}
+
+h3{display: block;
+margin-block-start: 0;
+margin-block-end: 0;
+margin-inline-start: 0px;
+margin-inline-end: 0px;
+font-weight: 600;
+font-size: 50px;
+text-align: center;
+
+}
+
+h5{
+    display: block;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: 500;
+    padding-top: 7px;
+    color: black;
+}
+
+.featuredproduct_p{
+    display: block;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.featuredproduct-container{
+    padding: 40px 80px;
+}
+
+.product-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 60px 0px;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.product-card{
+    width: 20%;
+    min-width: 234px;
+    padding: 10px 12px;
+    border-radius: 20px;
+    border: 1px solid #cce7d0;
+    cursor: pointer;
+    box-shadow: 20px 20px 30px rgba(0,0,0,0.02);
+    transition: 0.2s ease;
+    position: relative;
+    text-decoration: none;
+}
+
+.product-card:hover{
+    box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.06);
+}
+
+.product-card img{
+    width: 100%;
+    border-radius: 25px;
+}
+
+.product-name{
+   color: #b1b1b1;
+   font-size: 12px;
+   font-weight: 500;
+}
+
+.stars{
+    color: rgb(243, 181, 25);
+
+}
+
+.price{
+    /* padding-top: 7px; */
+    font-size: 17px;
+    color: #088178;
+    font-weight: 700;
+}
+
+.cart{
+    font-weight: 500;
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    border-radius: 50px;
+    background-color: #e8f6ea;
+    color: #088178;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 750px){
+    .product-container{
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 566px){
+    .featuredproduct-container{
+        padding: 20px 20px;
+    }
+    .featuredproduct-container h3{
+        font-size: 28px;
+    }
+    .product-container{
+        display: flex;
+        flex-wrap: nowrap;
+        overflow: scroll;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+}

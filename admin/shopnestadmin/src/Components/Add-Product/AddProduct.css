@@ -1,0 +1,40 @@
+.add-product-container{
+    width: 80%;
+    padding: 20px 10px;
+    background-color: rgb(243 243 243);
+    display: flex;
+    justify-content: center;
+}
+.add-product-wrapper{
+    /* border-radius: 10px; */
+    width: 50%;
+    background-color: white;
+    padding: 0px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.add-product{
+    text-decoration: none;
+    color: black;
+}
+.Product-list{
+    text-decoration: none;
+    color: black;
+}
+.BrandName{
+    width: 100%;
+}
+.ProductDesc input{
+    width: 100%;
+}
+.Instock-Container select{
+    width: 29%;
+}
+.add-product-wrapper button{
+    background-color: #13aeeb;
+    border: none;
+    border-radius: 8px;
+    width: 30%;
+    padding: 10px 20px;
+}

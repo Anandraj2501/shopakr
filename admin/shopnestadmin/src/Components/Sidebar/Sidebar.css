@@ -1,0 +1,35 @@
+.sidebar-container {
+    width: 20%;
+    background-color: rgb(68 104 124);
+    height: calc(100vh - 62px);
+    padding: 20px 30px;
+}
+
+.sidebar-wrapper {
+    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-product {
+    background-color: white;
+    padding: 20px 10px;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+}
+
+.Product-list {
+    background-color: white;
+    padding: 20px 10px;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+}
+
+.add-product:hover{
+    box-shadow: 0px 5px 15px rgb(65, 62, 62);
+}
+.Product-list:hover{
+    box-shadow: 0px 5px 15px rgb(65, 62, 62);
+}
