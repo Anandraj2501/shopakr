@@ -44,6 +44,10 @@ passport.use(new JwtStrategy(jwtOptions, function (jwtPayload, done) {
     }
   });
 }));
+
+router.post("/",(req,res)=>{
+  res.status(200).json({message:"hello"});
+})
 //for admins
 router.post("/register", function (req, res) {
   const userdata = new userModel({
