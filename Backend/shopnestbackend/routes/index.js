@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const Razorpay = require("razorpay");
 const productModel = require("./users");
 const userModel = require("./userdata");
 const actualUsers = require("./E-commerceUsers");
@@ -9,12 +10,18 @@ const path = require('path');
 const app = require('../app');
 const localStrategy = require("passport-local");
 const passport = require('passport');
+const crypto = require("crypto");
+const OrderData = require("./OrderData");
 
 const jwt = require('jsonwebtoken');
 const passportJWT = require('passport-jwt');
 const ExtractJwt = passportJWT.ExtractJwt;
 const JwtStrategy = passportJWT.Strategy;
 
+const instance = new Razorpay({
+  key_id: 'rzp_test_dxWr7puwaxDajl',
+  key_secret: 'D0qma2rlXtbYr7ax6s9YiuUX',
+});
 
 //for admins
 passport.use("admin-local", new localStrategy(userModel.authenticate()));
@@ -399,5 +406,78 @@ router.get('/cart', verifyToken, async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
+router.post("/checkout",verifyToken,async (req,res)=>{
+  console.log(req.body.total);
+  const amount = req.body.total;
+  const cartId = req.body.cartId;
+
+  var options = {
+    amount: Number(amount*100),  // amount in the smallest currency unit
+    currency: "INR",
+    receipt: "order_rcptid_11"
+  };
+  const order = await instance.orders.create(options);
+
+  const user = await actualUsers.findOne({ username: req.user.username });
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+
+  // Find the user's cart
+  const cart = await Cart.findById(cartId).populate('items.product');
+  if (!cart) {
+    return res.status(404).json({ message: 'Cart not found' });
+  }
+
+  const orderData = {
+    user: user._id,
+    orderTotal: amount,
+    items: cart.items.map(item => ({
+      product: item.product._id,
+      quantity: item.quantity,
+      size: item.size
+    })),
+    razorpayOrderId: order.id,
+    paymentStatus: 'pending' // We can update this once payment is successful
+  };
+  console.log(orderData,"order");
+  const newOrder = await OrderData.create(orderData);
+
+  // Clear the user's cart
+  cart.items = [];
+  await cart.save();
+
+  console.log(order);
+  res.status(200).json({order});
+})
+
+router.post("/paymentverification",async(req,res)=>{
+  console.log(req.body);
+  const {razorpay_payment_id,razorpay_order_id,razorpay_signature} = req.body;
+
+  const secret = "D0qma2rlXtbYr7ax6s9YiuUX";
+
+  const generated_signature = crypto.createHmac('sha256', secret)
+    .update(razorpay_order_id + "|" + razorpay_payment_id)
+    .digest('hex');
+
+    if (generated_signature === razorpay_signature) {
+      console.log("payment is successful");
+
+      // Find the order with the provided Razorpay order ID
+      const order = await OrderData.findOne({ razorpayOrderId: razorpay_order_id });
+      if (!order) {
+        return res.status(404).json({ message: 'Order not found' });
+      }
+
+      // Update the payment status to 'completed'
+      order.paymentStatus = 'completed';
+      await order.save();
+    } else {
+      console.log("payment verification failed");
+    }
+  res.status(200).json({success:true});
+})
 
 module.exports = router;

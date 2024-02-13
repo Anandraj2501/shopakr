@@ -1,3 +1,4 @@
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -7,14 +8,14 @@ const productModel = require("./routes/users");
 const userModel = require("./routes/userdata");
 const actualUser = require("./routes/E-commerceUsers");
 const session = require("express-session");
-
-
 const cors = require("cors");
 
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const passport = require('passport');
+
+
 
 
 
@@ -55,6 +56,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use("/addproduct", productModel);
 app.use("/products", productModel);
+
 
 
 // catch 404 and forward to error handler
