@@ -145,9 +145,8 @@ router.post("/user/login", passport.authenticate("user-local"), function (req, r
 
 
 
-
 const Storage = multer.diskStorage({
-  destination: path.join(__dirname, '../public/images'),
+  destination: path.join(__dirname, './public/images'),
   filename: (req, file, cb) => {
     return cb(null, Date.now() + '-' + file.originalname);
   }
