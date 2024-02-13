@@ -45,7 +45,7 @@ passport.use(new JwtStrategy(jwtOptions, function (jwtPayload, done) {
   });
 }));
 
-router.post("/",(req,res)=>{
+router.get("/",(req,res)=>{
   res.status(200).json({message:"hello"});
 })
 //for admins
