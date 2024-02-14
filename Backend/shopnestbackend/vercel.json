@@ -1,18 +1,15 @@
-
 {
     "version": 2,
     "builds": [
         {
-            "src": "./routes/index.js",
+            "src": "../Backend/shopnestbackend/routes/index.js",
             "use": "@vercel/node"
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
-            "destination": "./routes/index.js"
+            "dest": "../Backend/shopnestbackend/routes/index.js"
         }
-    ],
-    "rewrites": [{ "source": "/(.*)", "destination": "/" }] 
-    
+    ]
 }
