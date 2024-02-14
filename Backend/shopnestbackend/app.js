@@ -29,7 +29,7 @@ app.set('view engine', 'ejs');
 // Enable CORS middleware
 app.use(cors({
   credentials: true,
-  origin: ['https://shopnest2.netlify.app/']
+  origin: "https://shopnest2.netlify.app"
 }));
 
 // Allow access to static images
