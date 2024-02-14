@@ -51,6 +51,9 @@ passport.use(new JwtStrategy(jwtOptions, function (jwtPayload, done) {
 router.get("/",(req,res)=>{
   res.status(200).json({message:"hello"});
 })
+router.get("/home",(req,res)=>{
+  res.status(200).json("home");
+})
 //for admins
 router.post("/register", function (req, res) {
   const userdata = new userModel({
