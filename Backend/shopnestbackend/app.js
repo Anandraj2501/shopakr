@@ -33,7 +33,7 @@ app.use(cors({
 }));
 
 // Allow access to static images
-app.use('/images', express.static(path.join(__dirname, 'public/images')));
+// app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
 
 app.use(session({
