@@ -26,8 +26,15 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // app.use(cors());
-app.use(cors({credentials: true, origin: ['https://65ccac4e1f470c071234e080--glowing-meerkat-cc0a95.netlify.app/',"http://localhost:3001"]}));
-app.use('/images', express.static("/routes/public/images"));
+// Enable CORS middleware
+app.use(cors({
+  credentials: true,
+  origin: ['https://65ccac4e1f470c071234e080--glowing-meerkat-cc0a95.netlify.app', 'http://localhost:3001']
+}));
+
+// Allow access to static images
+app.use('/images', express.static(path.join(__dirname, 'public/images')));
+
 
 app.use(session({
   secret: "secret",
