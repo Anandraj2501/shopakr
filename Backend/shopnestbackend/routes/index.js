@@ -215,7 +215,7 @@ router.get("/products", async function (req, res) {
     console.log(products);
     const productsWithAbsoluteURLs = products.map(product => ({
       ...product._doc,
-      image: `${req.protocol}://${req.get('host')}/images/${path.basename(product.image).replace(/\\/g, '/')}`
+      image: `${req.protocol}://${req.get('host')}/images/${path.basename(product.image).replace(/\\/g, '/').replace('public/images/', '')}`
     }));
 
     res.status(200).json(productsWithAbsoluteURLs)
