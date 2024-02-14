@@ -29,7 +29,7 @@ app.set('view engine', 'ejs');
 // Enable CORS middleware
 app.use(cors({
   credentials: true,
-  origin: ['https://65ccac4e1f470c071234e080--glowing-meerkat-cc0a95.netlify.app', 'http://localhost:3001']
+  origin: ['https://65ccac4e1f470c071234e080--glowing-meerkat-cc0a95.netlify.app']
 }));
 
 // Allow access to static images
