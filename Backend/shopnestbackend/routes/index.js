@@ -15,7 +15,7 @@ const OrderData = require("./OrderData");
 
 const jwt = require('jsonwebtoken');
 const passportJWT = require('passport-jwt');
-const ExtractJwt = passportJWT.ExtractJwt;
+const ExtractJwt = passportJWT.ExtractJwt; 
 const JwtStrategy = passportJWT.Strategy;
 
 const instance = new Razorpay({
@@ -44,6 +44,9 @@ passport.use(new JwtStrategy(jwtOptions, function (jwtPayload, done) {
     }
   });
 }));
+
+
+
 
 router.get("/",(req,res)=>{
   res.status(200).json({message:"hello"});
@@ -143,10 +146,20 @@ router.post("/user/login", passport.authenticate("user-local"), function (req, r
   res.status(200).json({ token });
 })
 
+function isLoggedIn(req, res, next) {
+  console.log("in", req.isAuthenticated());
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.status(500);
+}
 
+const uploadDirectory = path.join(__dirname, 'Uploads');
+
+// Configure multer to store files in the specified directory
 
 const Storage = multer.diskStorage({
-  destination: path.join(__dirname, './public/images'),
+  destination: "./public/images",
   filename: (req, file, cb) => {
     return cb(null, Date.now() + '-' + file.originalname);
   }
@@ -157,13 +170,7 @@ const Storage = multer.diskStorage({
 const upload = multer({ storage: Storage })
 
 
-function isLoggedIn(req, res, next) {
-  console.log("in", req.isAuthenticated());
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.status(500);
-}
+
 
 
 

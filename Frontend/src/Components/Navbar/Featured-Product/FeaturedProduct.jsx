@@ -17,7 +17,7 @@ export default function FeaturedProduct() {
             try {
                 const product = await axios.get("http://localhost:3000/products");
                 
-                console.log(product.data,"aagya");
+                console.log(product.data[0].image,"aagya");
                 const slicedproduct = product.data.slice(0,8);
                 setFeaturedProducts(slicedproduct);
             } catch (error) {

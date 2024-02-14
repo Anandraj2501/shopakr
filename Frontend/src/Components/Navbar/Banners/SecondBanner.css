@@ -108,6 +108,29 @@
     font-size: 20px;
     
 }
+@media screen and (min-width: 1473px) and (max-width: 1628px){
+    .banner{
+        min-width: 49%;
+    }
+    
+}
+@media screen and (min-width: 1225px) and (max-width: 1473px){
+    .banner{
+        height: 40vh;
+        min-width: 49%;
+    }
+    
+}
+@media screen and (min-width: 750px) and (max-width: 1225px){
+    .banner{
+        height: 40vh;
+        min-width: 100%;
+    }
+    
+}
+
+
+
 @media screen and (max-width: 750px){
     .banner{
         height: 30vh;

@@ -27,6 +27,7 @@ app.set('view engine', 'ejs');
 
 // app.use(cors());
 app.use(cors({credentials: true, origin: ['http://localhost:3001',"http://localhost:3002"]}));
+app.use('/images', express.static("/routes/public/images"));
 
 app.use(session({
   secret: "secret",
