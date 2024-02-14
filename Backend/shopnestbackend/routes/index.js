@@ -212,10 +212,10 @@ router.post("/addproduct", isLoggedIn, upload.single('image'), async function (r
 router.get("/products", async function (req, res) {
   try {
     const products = await productModel.find();
-
+    console.log(products);
     const productsWithAbsoluteURLs = products.map(product => ({
       ...product._doc,
-      image: products.image
+      image: `${req.protocol}://${req.get('host')}/images/${path.basename(product.image).replace(/\\/g, '/')}`
     }));
 
     res.status(200).json(productsWithAbsoluteURLs)
