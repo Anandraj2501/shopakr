@@ -238,7 +238,7 @@ router.get("/products/:id", async (req, res) => {
     }
     const productWithAbsoluteURL = {
       ...product._doc,
-      image: `${req.protocol}://${req.get('host')}/images/${path.basename(product.image)}`
+      image: `${req.protocol}://${req.get('host')}/images/${path.basename(product.image).replace(/\\/g, '/').replace('public/images/', '')}`
     };
     res.json(productWithAbsoluteURL);
   } catch (error) {
@@ -404,7 +404,7 @@ router.get('/cart', verifyToken, async (req, res) => {
         const product = await productModel.findById(item.product._id);
         const productWithAbsoluteURL = {
           ...product._doc,
-          image: `${req.protocol}://${req.get('host')}/images/${path.basename(product.image)}`
+          image: `${req.protocol}://${req.get('host')}/images/${path.basename(product.image).replace(/\\/g, '/').replace('public/images/', '')}`
         };
         return {
           ...item.toObject(),
