@@ -155,7 +155,7 @@ export default function ProductDetails() {
                 <div className="right-container">
                     <p className='right-p'>Home / T-shirts</p>
                     <h3 className='right-h3 h3'>Men's  Fashion T-shirt</h3>
-                    <h3 className='right-h3 h3-2'>$ {product?.price}</h3>
+                    <h3 className='right-h3 h3-2'>&#x20b9 {product?.price}</h3>
                     <select name="Sizes" className="Sizes" value={selectedsize} onChange={(e)=>setSelectedSize(e.target.value)}>
                         <option value="small">S</option>
                         <option value="medium">M</option>
