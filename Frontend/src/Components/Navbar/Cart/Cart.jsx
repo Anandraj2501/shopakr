@@ -193,9 +193,9 @@ export default function Cart() {
                                 <tr>
                                     <td><img src={item.product.image} alt="#" /></td>
                                     <td>{item.product.BrandNames}</td>
-                                    <td>&#x20b9 {item.product.price}</td>
+                                    <td>₹ {item.product.price}</td>
                                     <td><input type="number" name="price" id="price" value={item.quantity} onChange={(e) => handleQuantityChange(item._id, parseInt(e.target.value))} /></td>
-                                    <td>&#x20b9 {item.product.price * item.quantity}</td>
+                                    <td>₹ {item.product.price * item.quantity}</td>
                                     <td><button onClick={() => { handleRemoveItem(item._id) }}>Remove</button></td>
                                 </tr>
                             </tbody>
@@ -214,7 +214,7 @@ export default function Cart() {
                     <table>
                         <tr>
                             <td>Cart SubTotals</td>
-                            <td>&#x20b9 {total}</td>
+                            <td>₹ {total}</td>
                         </tr>
                         <tr>
                             <td>Shipping</td>
@@ -222,7 +222,7 @@ export default function Cart() {
                         </tr>
                         <tr>
                             <td>Total</td>
-                            <td>&#x20b9 {total}</td>
+                            <td>₹ {total}</td>
                         </tr>
                     </table>
                     <button onClick={handleCheckout}>Proceed To checkout</button>

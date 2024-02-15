@@ -44,7 +44,7 @@ export default function FeaturedProduct() {
                                 <div className="rating">
                                     <IoIosStar className='stars' /><IoIosStar className='stars' /><IoIosStar className='stars' /><IoIosStar className='stars' /><IoIosStar className='stars' />
                                 </div>
-                                <h4 className='price'>&#x20b9 {products.price}</h4>
+                                <h4 className='price'>₹ {products.price}</h4>
                             </div>
                             <div className="cart"><FaCartPlus /></div>
 
