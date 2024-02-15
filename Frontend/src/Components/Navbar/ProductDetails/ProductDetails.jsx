@@ -60,7 +60,7 @@ export default function ProductDetails() {
     useEffect(() => {
 
         const fetchdata = async () => {
-            const response = await axios.get(`http://localhost:3000/products/${id}`)
+            const response = await axios.get(`https://shopnest2.onrender.com/products/${id}`)
             console.log(response.data);
             setProduct(response.data);
         }
@@ -75,7 +75,7 @@ export default function ProductDetails() {
                 return;
             }
             console.log(selectedsize,"size");
-            const response = await axios.post("http://localhost:3000/addtocart", { productId: id, size:selectedsize,quantity:quantity}, { headers: { Authorization: `Bearer ${authToken}` }, withCredentials:true}
+            const response = await axios.post("https://shopnest2.onrender.com/addtocart", { productId: id, size:selectedsize,quantity:quantity}, { headers: { Authorization: `Bearer ${authToken}` }, withCredentials:true}
             );
             toast("Product added to cart");
             console.log(response.data);
@@ -115,7 +115,7 @@ export default function ProductDetails() {
     const handleregister = async () => {
 
         try {
-            const response = await axios.post("http://localhost:3000/user/register", userdetails, { withCredentials: true });
+            const response = await axios.post("https://shopnest2.onrender.com/user/register", userdetails, { withCredentials: true });
             console.log(response);
             toast("Signup Successfully");
         } catch (error) {
@@ -126,7 +126,7 @@ export default function ProductDetails() {
 
     const handlelogin = async () => {
         try {
-            const response = await axios.post("http://localhost:3000/user/login", userdetails, { withCredentials: true });
+            const response = await axios.post("https://shopnest2.onrender.com/user/login", userdetails, { withCredentials: true });
             console.log(response);
             localStorage.setItem("logintoken",response.data.token);
             toast("Login Successfully");

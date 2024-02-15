@@ -34,7 +34,7 @@ export default function Cart() {
                     return;
                 }
 
-                const response = await axios.get("http://localhost:3000/cart", {
+                const response = await axios.get("https://shopnest2.onrender.com/cart", {
                     headers: {
                         Authorization: `Bearer ${authToken}`
                     }
@@ -69,7 +69,7 @@ export default function Cart() {
             }
 
             // Update quantity in the backend
-            await axios.put(`http://localhost:3000/cart/update/${itemId}`, {
+            await axios.put(`https://shopnest2.onrender.com/cart/update/${itemId}`, {
                 quantity: newQuantity
             }, {
                 headers: {
@@ -78,7 +78,7 @@ export default function Cart() {
             });
 
             // Update quantity in the local state
-            const response = await axios.get("http://localhost:3000/cart", {
+            const response = await axios.get("https://shopnest2.onrender.com/cart", {
                 headers: {
                     Authorization: `Bearer ${authToken}`
                 }
@@ -107,14 +107,14 @@ export default function Cart() {
             }
 
             // Remove item from the backend
-            await axios.delete(`http://localhost:3000/cart/remove/${itemId}`, {
+            await axios.delete(`https://shopnest2.onrender.com/cart/remove/${itemId}`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`
                 }
             });
 
             // Fetch updated cart data from the backend
-            const response = await axios.get("http://localhost:3000/cart", {
+            const response = await axios.get("https://shopnest2.onrender.com/cart", {
                 headers: {
                     Authorization: `Bearer ${authToken}`
                 }
@@ -136,7 +136,7 @@ export default function Cart() {
     }
 
     const handleCheckout = async () => {
-        const response = await axios.post("http://localhost:3000/checkout", { total: total,cartId: cartId },{headers:{
+        const response = await axios.post("https://shopnest2.onrender.com/checkout", { total: total,cartId: cartId },{headers:{
             Authorization: `Bearer ${authToken}`
         }});
         console.log(response, "checkout");
@@ -150,7 +150,7 @@ export default function Cart() {
             description: "Test Transaction",
             // image: "https://example.com/your_logo",
             order_id: order_id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-            callback_url: "http://localhost:3000/paymentverification",
+            callback_url: "https://shopnest2.onrender.com/paymentverification",
             // "prefill": {
             //     "name": "Gaurav Kumar",
             //     "email": "gaurav.kumar@example.com",
