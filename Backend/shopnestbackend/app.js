@@ -9,7 +9,6 @@ const userModel = require("./routes/userdata");
 const actualUser = require("./routes/E-commerceUsers");
 const session = require("express-session");
 const cors = require("cors");
-const bodyParser = require("body-parser");
 
 
 var indexRouter = require('./routes/index');
@@ -65,7 +64,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use("/addproduct", productModel);
 app.use("/products", productModel);
-app.use(bodyParser.json());
 
 
 // catch 404 and forward to error handler
