@@ -1,4 +1,5 @@
 var express = require('express');
+const { WebhookClient } = require('dialogflow-fulfillment');
 var router = express.Router();
 const Razorpay = require("razorpay");
 const productModel = require("./users");
@@ -492,5 +493,34 @@ router.post("/paymentverification",async(req,res)=>{
     }
   res.status(200).json({success:true});
 })
+
+router.post('/webhook', (req, res) => {
+  const agent = new WebhookClient({ request: req, response: res });
+
+  function handleWelcomeIntent(agent) {
+    agent.add("Welcome to our store! How can I assist you today?");
+  }
+
+  async function handleCartItemsIntent(agent) {
+    try {
+      // Find the user by username from the request
+      const products = await productModel.find();
+      
+      agent.add(`You have ${products.length} items in your cart.`);
+      // You can also send detailed information about cart items here if needed
+    } catch (error) {
+      agent.add("Sorry, I couldn't fetch your cart items at the moment.");
+    }
+  }
+
+  // Define other intent handlers here...
+
+  let intentMap = new Map();
+  intentMap.set('Welcome Intent', handleWelcomeIntent);
+  intentMap.set('Check Cart Items Intent', handleCartItemsIntent);
+  // Add other intent handlers...
+
+  agent.handleRequest(intentMap);
+});
 
 module.exports = router;

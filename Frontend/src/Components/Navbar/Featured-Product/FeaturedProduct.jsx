@@ -15,7 +15,7 @@ export default function FeaturedProduct() {
 
         const fetchData = async () => {
             try {
-                const product = await axios.get("https://shopnest2.onrender.com/products");
+                const product = await axios.get("http://localhost:3000/products");
                 
                 console.log(product.data[0].image,"aagya");
                 const slicedproduct = product.data.slice(0,8);
