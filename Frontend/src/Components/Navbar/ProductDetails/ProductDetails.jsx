@@ -15,17 +15,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
+
 
 
 
@@ -60,7 +50,7 @@ export default function ProductDetails() {
     useEffect(() => {
 
         const fetchdata = async () => {
-            const response = await axios.get(`https://shopnest2.onrender.com/products/${id}`)
+            const response = await axios.get(`http://localhost:3000/products/${id}`)
             console.log(response.data);
             setProduct(response.data);
         }
@@ -75,14 +65,14 @@ export default function ProductDetails() {
                 return;
             }
             console.log(selectedsize,"size");
-            const response = await axios.post("https://shopnest2.onrender.com/addtocart", { productId: id, size:selectedsize,quantity:quantity}, { headers: { Authorization: `Bearer ${authToken}` }, withCredentials:true}
+            const response = await axios.post("http://localhost:3000/addtocart", { productId: id, size:selectedsize,quantity:quantity}, { headers: { Authorization: `Bearer ${authToken}` }, withCredentials:true}
             );
             toast("Product added to cart");
             console.log(response.data);
             // Handle success or update UI accordingly
         } catch (error) {
-            console.error(error);
-            toast(error);
+            console.log(error);
+            toast.error("Please Login");
             // Handle error or update UI accordingly
         }
     }
@@ -115,7 +105,7 @@ export default function ProductDetails() {
     const handleregister = async () => {
 
         try {
-            const response = await axios.post("https://shopnest2.onrender.com/user/register", userdetails, { withCredentials: true });
+            const response = await axios.post("http://localhost:3000/user/register", userdetails, { withCredentials: true });
             console.log(response);
             toast("Signup Successfully");
         } catch (error) {
@@ -126,7 +116,7 @@ export default function ProductDetails() {
 
     const handlelogin = async () => {
         try {
-            const response = await axios.post("https://shopnest2.onrender.com/user/login", userdetails, { withCredentials: true });
+            const response = await axios.post("http://localhost:3000/user/login", userdetails, { withCredentials: true });
             console.log(response);
             localStorage.setItem("logintoken",response.data.token);
             toast("Login Successfully");
@@ -182,7 +172,7 @@ export default function ProductDetails() {
                     <FormControl sx={{ mt: 2, width: '100%' }}>
                         <InputLabel htmlFor="username">Email</InputLabel>
                         <Input
-                            id="username"
+                            id="email"
                             type="text"
                             name='email'
                             value={userdetails.email}

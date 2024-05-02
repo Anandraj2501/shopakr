@@ -157,7 +157,7 @@ function isLoggedIn(req, res, next) {
   res.status(500);
 }
 
-const uploadDirectory = path.join(__dirname, 'Uploads');
+// const uploadDirectory = path.join(__dirname, 'Uploads');
 
 // Configure multer to store files in the specified directory
 
@@ -261,6 +261,7 @@ function verifyToken(req, res, next) {
     if (err) {
       return res.status(401).json({ message: 'Invalid token' });
     }
+    console.log(decoded,"decoded");
     req.user = decoded; // Attach the decoded payload to the request object
     next();
   });
@@ -391,7 +392,7 @@ router.get('/cart', verifyToken, async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    console.log(req.user.username);
+    console.log(user ,"kyaa hai");
     const cart = await Cart.findOne({ user: user._id }).populate('items.product');
 
     if (!cart) {
@@ -493,5 +494,22 @@ router.post("/paymentverification",async(req,res)=>{
   res.status(200).json({success:true});
 })
 
+router.get("/cart-details",verifyToken,async(req,res)=>{
+  try{
+    const user = await actualUsers.findOne({username: req.user.username});
+    
+    if(!user){
+      return res.status(404).json({ message: 'User not found' });
+    }
+    // console.log(user);
+    const cart = await Cart.findOne({ user: user._id }).populate('items.product');
+    console.log(cart);
+    res.status(200).json({ cart:cart });
+
+  }
+  catch(error){
+    res.status(400).json({error:"Internal Server Error"});
+  }
+})
 
 module.exports = router;
